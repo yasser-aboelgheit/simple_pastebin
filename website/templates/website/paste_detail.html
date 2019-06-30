@@ -1,0 +1,8 @@
+{% extends 'website/base.html' %}
+{% block content %}
+<div class="post-entry">
+<p>{{ paste.name }}</p>
+</div>
+<a href="{% url 'paste_edit' paste.pk %}">+ Edit paste</a>
+<p><a href="{% url 'paste_delete' paste.pk %}">+ Delete Paste</a></p>
+{% endblock content %}

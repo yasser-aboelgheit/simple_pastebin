@@ -1,0 +1,33 @@
+{% extends 'website/base.html' %}
+{% load humanize %}
+
+{% block content %}
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ <div class='container'>
+
+    <div id='content' class='row-fluid'>
+    
+      <div class='span10 main'>
+       <form class="form-contact" action="" method="POST">
+              {% csrf_token %}
+<textarea class="form-control"  name="name"  rows="1" placeholder="Paste name..." style="line-height: 1.5;">{{ form.name.value|default:'' }}</textarea>
+<textarea class="form-control"  name="code"  rows="10" placeholder="Enter your paste here..." style="line-height: 1.5;">{{ form.code.value|default:'' }}</textarea>
+<!--<input class="form-control"  type="hidden"  name="author"   value = "{{ user.username }}">-->
+
+ <input type="submit" class="btn btn-primary btn-lg" >
+</form>
+      </div>
+      <div class='span2 sidebar'>
+        <h3>Public Pastes</h3>
+        <ul class="nav nav-tabs nav-stacked">
+        {% for paste in pastes|slice:":5" %}
+          <li><a href="{% url 'paste_detail' paste.pk %}">{{ paste.name }}<br/></a>{{ paste.created|naturaltime}}<br/></li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
