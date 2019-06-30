@@ -1,8 +1,17 @@
 {% extends 'website/base.html' %}
 {% block content %}
 <div class="post-entry">
-<p>{{ paste.name }}</p>
+<p>paste name: {{ paste.name }}</p>
+    <p>code: {{ paste.code}}</p>
+    {% if paste.author %}
+    <p>Owner: {{ paste.author }}</p>
+    {% else %}
+        <p>Owner: anonymous</p>
+{% endif %}
 </div>
+
+{% if paste.author == user%}
 <a href="{% url 'paste_edit' paste.pk %}">+ Edit paste</a>
 <p><a href="{% url 'paste_delete' paste.pk %}">+ Delete Paste</a></p>
+{% endif %}
 {% endblock content %}

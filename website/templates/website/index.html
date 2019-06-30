@@ -14,13 +14,21 @@
               {% csrf_token %}
 <textarea class="form-control"  name="name"  rows="1" placeholder="Paste name..." style="line-height: 1.5;">{{ form.name.value|default:'' }}</textarea>
 <textarea class="form-control"  name="code"  rows="10" placeholder="Enter your paste here..." style="line-height: 1.5;">{{ form.code.value|default:'' }}</textarea>
-<!--<input class="form-control"  type="hidden"  name="author"   value = "{{ user.username }}">-->
 
  <input type="submit" class="btn btn-primary btn-lg" >
 </form>
       </div>
+
       <div class='span2 sidebar'>
-        <h3>Public Pastes</h3>
+          {% if user.is_authenticated %}
+          <h4>My Pastes</h4>
+        <ul class="nav nav-tabs nav-stacked">
+        {% for paste in user_pastes|slice:":5" %}
+          <li><a href="{% url 'paste_detail' paste.pk %}">{{ paste.name }}<br/></a>{{ paste.created|naturaltime}}<br/></li>
+        {% endfor %}
+        </ul>
+          {% endif %}
+        <h4>Public Pastes</h4>
         <ul class="nav nav-tabs nav-stacked">
         {% for paste in pastes|slice:":5" %}
           <li><a href="{% url 'paste_detail' paste.pk %}">{{ paste.name }}<br/></a>{{ paste.created|naturaltime}}<br/></li>

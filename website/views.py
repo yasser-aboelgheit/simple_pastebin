@@ -19,21 +19,14 @@ class HomepageView(CreateView):
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
         data['pastes'] = Paste.objects.all().order_by('-created')
-        # data['current_user'] = self.request.user
+        if self.request.user.is_authenticated:
+            data['user_pastes'] = Paste.objects.filter(author=self.request.user).order_by('-created')
         return data
 
-    # def get_initial(self):
-    #     initial = super(HomepageView, self).get_initial()
-    #     initial.update({'author': self.request.user})
-    #     print(self.request.user)
-    #     return initial
-    #
-    #
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if self.request.user.is_authenticated:
-            print("dasda")
-
             self.object.author = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
