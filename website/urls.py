@@ -7,6 +7,4 @@ urlpatterns = [
     path('paste/<int:pk>/', views.PasteDetailView.as_view(), name='paste_detail'),
     path('paste/<int:pk>/edit/',views.PasteUpdateView.as_view(), name='paste_edit'),
     path('paste/<int:pk>/delete/', views.PasteDeleteView.as_view(), name='paste_delete'),
-
 ]
- 
