@@ -5,5 +5,5 @@ router = routers.DefaultRouter()
 router.register('pastes', PasteViewSet)
 router.register('users', UserViewSet)
 
-for url in router.urls:
-    print(url)
+# for url in router.urls:
+#     print(url)

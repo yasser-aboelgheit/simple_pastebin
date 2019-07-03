@@ -11,6 +11,7 @@ class HomepageView(CreateView):
     template_name = 'website/index.html'
     form_class = pasteform
     success_message = "Message sent successfully"
+
     
     def get_success_url(self):
         return reverse('home')
