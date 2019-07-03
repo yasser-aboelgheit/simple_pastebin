@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 httpie = "*"
 django-filter = "*"
+tinylinks = "*"
+django-tinylinks = "*"
 
 [requires]
 python_version = "3.7"

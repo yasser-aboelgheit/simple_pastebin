@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PasteSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name="paste-detail")
+
     if Paste.author:
         author = serializers.ReadOnlyField(source='author.username')
 
