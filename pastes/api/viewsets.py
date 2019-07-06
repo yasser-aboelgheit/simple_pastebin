@@ -18,14 +18,16 @@ class PasteFilter(filters.FilterSet):
         }
 
 
+
 class PasteViewSet(viewsets.ModelViewSet):
     queryset = Paste.objects.all()
     serializer_class = PasteSerializer
     filterset_class = PasteFilter
     permission_classes = [IsOwnerOrReadOnly]
-
     def perform_create(self, serializer):
         if self.request.user.is_authenticated:
-            serializer.save(author=self.request.user)
+            serializer.save(author=str(self.request.user))
         else:
             serializer.save()
+
+
