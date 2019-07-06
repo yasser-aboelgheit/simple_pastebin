@@ -11,10 +11,4 @@ class IsOwnerOrReadOnly(BasePermission):
                 return True
             elif (obj.privacy == "custome") and (str(request.user) in str(obj.allow.all())):
                 return True
-
-        # print (str(obj.author))
-        # ["yasser", "bla", str(request.user)]obj.author
-        # for i in (obj.allow.all()):
-        #     print (type(str(i)))
-
         return obj.author == str(request.user)
